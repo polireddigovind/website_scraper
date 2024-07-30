@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 import io from 'socket.io-client';
 
-const socket = io('http://127.0.0.1:5000');
+const socket = io('http://api.evergrowadvisors.com');
 
 const options = [
   { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo ' },
