@@ -1,0 +1,262 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  background-color: #f4f4f4;
+}
+
+.scrap_urls_container {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.prompt {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.prompt label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+.prompt textarea {
+  width: 40%;
+  height: 90px;
+  padding: 5px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  color: #01320a;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 2.5em;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  color: #01320a;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 2.5em;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+}
+
+h4 {
+  font-weight: bold;
+  color: #01320a;
+  padding: 5px;
+  margin: 5px;
+}
+
+.website button {
+  color: #f0e2e2;
+  margin-top: 10px;
+  padding: 20px;
+  border: 2px solid #f0e2e2;
+  border-radius: 20px;
+  background-color: #0c454d;
+}
+
+/* tables */
+.separate_tables {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+}
+
+.sample_urls {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.sample_urls table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sample_urls th,
+.sample_urls td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.sample_urls th {
+  background-color: #3a543b;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.sample_urls tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.sample_urls tbody tr:hover {
+  background-color: #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.sample_urls td:nth-child(2),
+.sample_urls th:nth-child(2) {
+  width: 97%;
+  word-wrap: break-word;
+}
+
+.sample_urls td:nth-child(3),
+.sample_urls th:nth-child(3) {
+  width: 3%;
+  /* Adjust as needed */
+}
+
+
+/* src/Dropdown.css */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+.selected-option {
+  margin-top: 0px;
+  font-size: 16px;
+  color: #333;
+}
+
+.react-select__control {
+  width: 620px;
+  border-radius: 4px;
+  border: 1px solid #f0f8f3;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+.react-select__control--is-focused {
+  border-color: #57635e;
+  box-shadow: 0 0 0 1px #054329;
+}
+
+.react-select__menu {
+  border-radius: 4px;
+  border: 1px solid #4a5d50;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+
+
+/* url input container */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 30vh;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0c0c0c;
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.form-textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+.form-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #054329;
+  /* Bootstrap blue or any color you prefer */
+  border: none;
+  border-radius: 4px;
+  /* Rounded corners for the button */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Smooth transition for hover effect */
+}
+
+.form-button:hover {
+  background-color: #054329;
+  /* Darker blue on hover */
+}
+
+
+
+/*email inputs */
+
+.form-email-group {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-left: 35%;
+  width: 30%;
+}
