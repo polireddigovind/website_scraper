@@ -75,33 +75,32 @@ def get_urls_data():
 @app.route('/fullurls', methods=['GET'])
 def get_fullurls_data():
     try:
-        textPrompt = request.args.get('textPrompt').strip()
-        model = request.args.get('model').strip()
-        textPrompt_openai = request.args.get('textPrompt_openai').strip()
-        openaimodel = request.args.get('openaimodel').strip()
-        email = request.args.get('email').strip()
+        textPrompt = request.args.get('textPrompt', '').strip()
+        model = request.args.get('model', '').strip()
+        textPrompt_openai = request.args.get('textPrompt_openai', '').strip()
+        openaimodel = request.args.get('openaimodel', '').strip()
+        email = request.args.get('email', '').strip()
 
-        if model == '':
+        if not model:
             return jsonify({'error': 'Please select a model'}), 400
-        if len(textPrompt) == 0:
+        if not textPrompt:
             return jsonify({'error': 'Please provide a non-empty textPrompt'}), 400
-        if len(textPrompt_openai) == 0 and len(openaimodel) > 0:
-            return jsonify({'error': 'Please provide a non-empty textPrompt_openai'}), 400
-        if len(textPrompt_openai) > 0 and openaimodel == '':
+        if textPrompt_openai and not openaimodel:
             return jsonify({'error': 'Please select an openaimodel'}), 400
+        if openaimodel and not textPrompt_openai:
+            return jsonify({'error': 'Please provide a non-empty textPrompt_openai'}), 400
 
         df = scrap_fillurls_file(textPrompt, model, textPrompt_openai, openaimodel)
         csv_buffer = io.StringIO()
         df.to_csv(csv_buffer, index=False)
         csv_buffer.seek(0)
 
-        # Email setup
         sender_email = "leads@evergrowadvisors.com"
         receiver_email = email
-        smtp_password = os.getenv('GMAIL_APP_PASSWORD')
+        email_password = os.getenv('GMAIL_APP_PASSWORD')
 
-        if not smtp_password:
-            raise Exception("Gmail app password is not set")
+        if not email_password:
+            raise Exception("Email password is not set")
 
         message = MIMEMultipart()
         message["From"] = sender_email
@@ -111,26 +110,35 @@ def get_fullurls_data():
         body = "Please find the attached CSV file."
         message.attach(MIMEText(body, "plain"))
 
+        # Attachment setup
         part = MIMEBase("application", "octet-stream")
         part.set_payload(csv_buffer.getvalue())
         encoders.encode_base64(part)
         part.add_header("Content-Disposition", f"attachment; filename=data.csv")
-
         message.attach(part)
 
+        # Sending email
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
-            server.login(sender_email, smtp_password)
+            server.login(sender_email, email_password)
             server.sendmail(sender_email, receiver_email, message.as_string())
 
+        # Preparing the response
         response = make_response(csv_buffer.getvalue())
         response.headers['Content-Disposition'] = 'attachment; filename=data.csv'
         response.headers['Content-Type'] = 'text/csv'
         return response
 
+    except smtplib.SMTPAuthenticationError as e:
+        app.logger.error(f"SMTP Authentication Error: {e}")
+        return jsonify({'error': 'SMTP Authentication Error'}), 500
+    except smtplib.SMTPException as e:
+        app.logger.error(f"SMTP Error: {e}")
+        return jsonify({'error': 'SMTP Error'}), 500
     except Exception as e:
         app.logger.error(f"Error processing request: {str(e)}")
         return jsonify({'error': 'An error occurred while processing the request'}), 500
+
 
 
 if __name__ == '__main__':
