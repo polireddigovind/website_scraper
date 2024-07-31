@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 import io from 'socket.io-client';
 
-const socket = io('http://api.evergrowadvisors.com');
+const socket = io('http://localhost:5000');
 
 const options = [
   { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo ' },
@@ -81,7 +81,7 @@ function App() {
       const formData = new FormData();
       formData.append('file', file);
       try {
-        const response = await fetch('http://api.evergrowadvisors.com/upload', {
+        const response = await fetch('http://localhost:5000/upload', {
           method: 'POST',
           body: formData,
         });
@@ -137,7 +137,7 @@ function App() {
     }).toString();
 
     try {
-      const response = await fetch(`http://api.evergrowadvisors.com/urls?${queryParams}`);
+      const response = await fetch(`http://localhost:5000/urls?${queryParams}`);
       const res_data = await response.json();
 
       if (res_data.urls && res_data.urls.length > 0) {
@@ -184,7 +184,7 @@ function App() {
     }
     setfullScrap("processing the Urls........")
     try {
-      const response = await fetch(`http://api.evergrowadvisors.com/fullurls?textPrompt=${textPrompt}&model=${model}&textPrompt_openai=${textPrompt_openai}&openaimodel=${openaimodel}&email=${email}`);
+      const response = await fetch(`http://localhost:5000/fullurls?textPrompt=${textPrompt}&model=${model}&textPrompt_openai=${textPrompt_openai}&openaimodel=${openaimodel}&email=${email}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(new Blob([blob]));
       const link = document.createElement('a');
